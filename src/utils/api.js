@@ -23,3 +23,9 @@ export const getUsers = () => {
     return res.data;
   });
 };
+
+export const addUser = (newUser) => {
+  return salesBoardApi.post('users', newUser).then((res) => {
+    return res.data;
+  });
+};
