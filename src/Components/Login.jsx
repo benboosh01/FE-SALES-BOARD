@@ -1,13 +1,15 @@
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/user';
 import { getUsers } from '../utils/api';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const { setLoggedInUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [userFound, setUserFound] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,30 +21,38 @@ export const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    users.forEach((user) => {
+    for (const user of users) {
       if (user.username === username) {
         setLoggedInUser(user);
+        setUserFound(true);
+        break;
       } else {
         setUserFound(false);
       }
-    });
+    }
   };
 
   const handleUsername = (event) => {
     setUsername(event.target.value);
   };
 
+  const handleRegister = () => {
+    navigate('/register');
+  };
+
   if (isLoading) return <p>loading...</p>;
   return (
     <form onSubmit={handleSubmit}>
-      {loggedInUser ? <p>{loggedInUser.username}</p> : null}
       <label>
         Username
         <input type="text" onChange={handleUsername} />
       </label>
-      <input type="submit" value="Submit" />
-      {userFound && !loggedInUser.username ? null : (
-        <p>User not found.. please try again or register</p>
+      <input type="submit" value="Login" />
+      <button onClick={handleRegister}>Register</button>
+      {userFound ? null : (
+        <div>
+          <p>User not found.. please try again or register</p>
+        </div>
       )}
     </form>
   );
