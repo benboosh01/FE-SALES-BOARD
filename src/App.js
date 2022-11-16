@@ -1,8 +1,11 @@
 import './App.css';
 import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { Sales } from './Components/Sales';
 import { SalesType } from './Components/SalesType';
 import { Login } from './Components/Login';
+import { Register } from './Components/Register';
+import { Home } from './Components/Home';
 
 function App() {
   const [salesTypeSelected, setSalesTypeSelected] = useState('');
@@ -10,11 +13,22 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Sales Board</h1>
+        <h1>Salesboard</h1>
       </header>
-      <Login />
-      <SalesType setSalesTypeSelected={setSalesTypeSelected} />
-      <Sales salesType={salesTypeSelected} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/sales"
+          element={
+            <>
+              <SalesType setSalesTypeSelected={setSalesTypeSelected} />
+              <Sales salesType={salesTypeSelected} />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }
