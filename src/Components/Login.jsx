@@ -25,6 +25,8 @@ export const Login = () => {
       if (user.username === username) {
         setLoggedInUser(user);
         setUserFound(true);
+        setUsername('');
+        handleLogin();
         break;
       } else {
         setUserFound(false);
@@ -40,12 +42,16 @@ export const Login = () => {
     navigate('/register');
   };
 
+  const handleLogin = () => {
+    navigate('/profile');
+  };
+
   if (isLoading) return <p>loading...</p>;
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Username
-        <input type="text" onChange={handleUsername} />
+        <input type="text" onChange={handleUsername} value={username} />
       </label>
       <input type="submit" value="Login" />
       <button onClick={handleRegister}>Register</button>
