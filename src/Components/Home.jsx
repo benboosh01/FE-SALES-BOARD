@@ -1,6 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/user';
 
 export const Home = () => {
+  const { loggedInUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -18,8 +21,12 @@ export const Home = () => {
         Track your sales numbers in real time so you know how your team are
         performing!
       </p>
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleRegister}>Register</button>
+      {loggedInUser.username ? undefined : (
+        <div>
+          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleRegister}>Register</button>
+        </div>
+      )}
     </section>
   );
 };
