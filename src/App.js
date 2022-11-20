@@ -8,6 +8,7 @@ import { Register } from './Components/Register';
 import { Home } from './Components/Home';
 import { Profile } from './Components/Profile';
 import { UserSales } from './Components/UserSales';
+import { MainNav } from './Components/MainNav';
 
 function App() {
   const [salesTypeSelected, setSalesTypeSelected] = useState('');
@@ -17,6 +18,7 @@ function App() {
       <header className="App-header">
         <h1>Salesboard</h1>
       </header>
+      <MainNav />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
