@@ -28,7 +28,10 @@ function App() {
           element={
             <>
               <Profile />
-              <SalesType setSalesTypeSelected={setSalesTypeSelected} />
+              <SalesType
+                setSalesTypeSelected={setSalesTypeSelected}
+                salesTypeSelected={salesTypeSelected}
+              />
               <UserSales salesType={salesTypeSelected} />
             </>
           }
@@ -37,7 +40,10 @@ function App() {
           path="/sales"
           element={
             <>
-              <SalesType setSalesTypeSelected={setSalesTypeSelected} />
+              <SalesType
+                setSalesTypeSelected={setSalesTypeSelected}
+                salesTypeSelected={salesTypeSelected}
+              />
               <Sales salesType={salesTypeSelected} />
             </>
           }
