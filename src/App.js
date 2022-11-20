@@ -7,6 +7,7 @@ import { Login } from './Components/Login';
 import { Register } from './Components/Register';
 import { Home } from './Components/Home';
 import { Profile } from './Components/Profile';
+import { UserSales } from './Components/UserSales';
 
 function App() {
   const [salesTypeSelected, setSalesTypeSelected] = useState('');
@@ -20,7 +21,16 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Profile />
+              <SalesType setSalesTypeSelected={setSalesTypeSelected} />
+              <UserSales salesType={salesTypeSelected} />
+            </>
+          }
+        />
         <Route
           path="/sales"
           element={
