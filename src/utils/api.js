@@ -4,9 +4,11 @@ const salesBoardApi = axios.create({
   baseURL: 'https://sales-board.cyclic.app/api/',
 });
 
-export const getSales = (date, salesType) => {
+export const getSales = (date, salesType, username) => {
   return salesBoardApi
-    .get('sales', { params: { sales_date: date, sales_type: salesType } })
+    .get('sales', {
+      params: { sales_date: date, sales_type: salesType, sales_user: username },
+    })
     .then((res) => {
       return res.data;
     });
