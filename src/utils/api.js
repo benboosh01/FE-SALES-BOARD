@@ -31,3 +31,10 @@ export const addUser = (newUser) => {
     return res.data;
   });
 };
+
+export const updateUser = (userUpdate) => {
+  console.log(userUpdate);
+  return salesBoardApi.patch('users', userUpdate).then((res) => {
+    return res.data;
+  });
+};
