@@ -48,11 +48,16 @@ export const Login = () => {
 
   if (isLoading) return <p>loading...</p>;
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username
-        <input type="text" onChange={handleUsername} value={username} />
-      </label>
+    <form onSubmit={handleSubmit} className="login-form">
+      <h2>Login</h2>
+      <label htmlFor="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        onChange={handleUsername}
+        value={username}
+        placeholder="Enter username..."
+      />
       <input type="submit" value="Login" />
       <button onClick={handleRegister}>Register</button>
       {userFound ? null : (

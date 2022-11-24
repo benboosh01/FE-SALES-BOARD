@@ -24,7 +24,7 @@ export const Sales = ({ salesType }) => {
 
   if (isLoading) return <p>loading....</p>;
   return (
-    <section>
+    <section className="all-sales-section">
       <DatePicker
         selected={startDate}
         onChange={(date) => {
@@ -34,12 +34,14 @@ export const Sales = ({ salesType }) => {
       <ul>
         {sales.map((salesEntry) => {
           return (
-            <li key={salesEntry.sales_entry_id}>
+            <li key={salesEntry.sales_entry_id} className="sales-entry">
               <p>{salesEntry.sales_date}</p>
-              <p>{salesEntry.first_name}</p>
-              <p>{salesEntry.surname}</p>
-              <p>{salesEntry.sales_type}</p>
-              <p>{salesEntry.sales_number}</p>
+              <p>
+                {salesEntry.first_name} {salesEntry.surname}
+              </p>
+              <p>
+                {salesEntry.sales_type}: {salesEntry.sales_number}
+              </p>
             </li>
           );
         })}

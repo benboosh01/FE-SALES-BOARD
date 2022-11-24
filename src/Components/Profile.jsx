@@ -11,10 +11,10 @@ export const Profile = () => {
   };
 
   return (
-    <section>
-      <h1>{loggedInUser.username}</h1>
-      <p>{loggedInUser.first_name + ' ' + loggedInUser.surname}</p>
-      <p>{loggedInUser.team}</p>
+    <section className="profile-section">
+      <h1>Username: {loggedInUser.username}</h1>
+      <p>Name: {loggedInUser.first_name + ' ' + loggedInUser.surname}</p>
+      <p>Line Manager: {loggedInUser.team}</p>
       {editProfile ? (
         <EditProfileForm handleEditProfile={handleEditProfile} />
       ) : (

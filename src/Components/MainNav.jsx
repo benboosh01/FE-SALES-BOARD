@@ -11,14 +11,15 @@ export const MainNav = () => {
 
   return (
     <nav>
-      <ul>
-        <li>
-          <NavLink to="/" end>
+      <ul className="main-nav-ul">
+        <li className="nav-link-li">
+          <NavLink className="nav-link" to="/" end>
             Home
           </NavLink>
         </li>
-        <li>
+        <li className="nav-link-li">
           <NavLink
+            className="nav-link"
             to="sales"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
@@ -26,8 +27,9 @@ export const MainNav = () => {
           </NavLink>
         </li>
         {loggedInUser.username ? (
-          <li>
+          <li className="nav-link-li">
             <NavLink
+              className="nav-link"
               to="profile"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
@@ -36,8 +38,9 @@ export const MainNav = () => {
           </li>
         ) : undefined}
         {loggedInUser.username ? (
-          <li>
+          <li className="nav-link-li">
             <NavLink
+              className="nav-link"
               to="usersalesboard"
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >

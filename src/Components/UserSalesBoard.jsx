@@ -133,51 +133,51 @@ export const UserSalesBoard = () => {
   if (isLoading) return <p>loading salesboard...</p>;
   return (
     <section>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={loggedInUser.username} required disabled />
-        </label>
-        <label>
-          Sales Date:
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              setStartDate(date);
-            }}
-          />
-        </label>
-        <label>
-          Sales Type:
-          <select value={salesType} onChange={handleSalesType}>
-            {salesTypes.map((salesType) => {
-              return (
-                <option key={salesType.sales_type} value={salesType.sales_type}>
-                  {salesType.sales_type}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <label>
-          Sales Change:
+      <form onSubmit={handleSubmit} className="user-sales-form">
+        <label>Username:</label>
+        <input type="text" value={loggedInUser.username} required disabled />
+
+        <label>Sales Date:</label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => {
+            setStartDate(date);
+          }}
+        />
+
+        <label>Sales Type:</label>
+        <select value={salesType} onChange={handleSalesType}>
+          {salesTypes.map((salesType) => {
+            return (
+              <option key={salesType.sales_type} value={salesType.sales_type}>
+                {salesType.sales_type}
+              </option>
+            );
+          })}
+        </select>
+
+        <label>Sales Change:</label>
+        <div className="sales-change-div">
           <span>{salesNumber}</span>
           <button onClick={handleMinusSale}>-</button>
           <button onClick={handlePlusSale}>+</button>
-          <input type="submit" value="Submit" />
-        </label>
+        </div>
+        <input type="submit" value="Submit" />
       </form>
-      <ul>
-        {todaysSales.map((salesEntry) => {
-          return (
-            <li key={salesEntry.sales_entry_id}>
-              <p>{salesEntry.sales_date}</p>
-              <p>{salesEntry.sales_type}</p>
-              <p>{salesEntry.sales_number}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <section className="user-sales-section">
+        <h3>Sales Processed:</h3>
+        <ul className="user-sales-ul">
+          {todaysSales.map((salesEntry) => {
+            return (
+              <li key={salesEntry.sales_entry_id} className="sales-entry">
+                <p>{salesEntry.sales_date}</p>
+                <p>{salesEntry.sales_type}</p>
+                <p>{salesEntry.sales_number}</p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </section>
   );
 };

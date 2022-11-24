@@ -86,7 +86,7 @@ export const EditProfileForm = ({ handleEditProfile }) => {
     setDisable(false);
   };
 
-  if (isLoading) return <p>loading update EditProfileForm form...</p>;
+  if (isLoading) return <p>loading update profile form...</p>;
   return (
     <form onSubmit={handleSubmit}>
       <label>

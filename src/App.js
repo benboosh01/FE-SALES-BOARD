@@ -22,44 +22,50 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Salesboard</h1>
-        {loggedInUser.username ? (
-          <button onClick={handleLogOut}>Log out</button>
-        ) : null}
-      </header>
-      <MainNav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Profile />
-              <SalesType
-                setSalesTypeSelected={setSalesTypeSelected}
-                salesTypeSelected={salesTypeSelected}
-              />
-              <UserSales salesType={salesTypeSelected} />
-            </>
-          }
-        />
-        <Route
-          path="/sales"
-          element={
-            <>
-              <SalesType
-                setSalesTypeSelected={setSalesTypeSelected}
-                salesTypeSelected={salesTypeSelected}
-              />
-              <Sales salesType={salesTypeSelected} />
-            </>
-          }
-        />
-        <Route path="/usersalesboard" element={<UserSalesBoard />} />
-      </Routes>
+      <div>
+        <header className="App-header">
+          <h1 className="title">Salesboard</h1>
+          {loggedInUser.username ? (
+            <button className="log-out-button" onClick={handleLogOut}>
+              Log out
+            </button>
+          ) : null}
+        </header>
+        <MainNav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Profile />
+                <SalesType
+                  setSalesTypeSelected={setSalesTypeSelected}
+                  salesTypeSelected={salesTypeSelected}
+                />
+                <UserSales salesType={salesTypeSelected} />
+              </>
+            }
+          />
+          <Route
+            path="/sales"
+            element={
+              <>
+                <SalesType
+                  setSalesTypeSelected={setSalesTypeSelected}
+                  salesTypeSelected={salesTypeSelected}
+                />
+                <Sales salesType={salesTypeSelected} />
+              </>
+            }
+          />
+          <Route path="/usersalesboard" element={<UserSalesBoard />} />
+        </Routes>
+      </div>
+
+      <footer></footer>
     </div>
   );
 }

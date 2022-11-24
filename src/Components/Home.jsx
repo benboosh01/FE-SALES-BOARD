@@ -15,14 +15,14 @@ export const Home = () => {
   };
 
   return (
-    <section>
+    <section className="home-section">
       <h2>Welcome to salesboard!</h2>
       <p>
         Track your sales numbers in real time so you know how your team are
         performing!
       </p>
       {loggedInUser.username ? undefined : (
-        <div>
+        <div className="home-buttons">
           <button onClick={handleLogin}>Login</button>
           <button onClick={handleRegister}>Register</button>
         </div>

@@ -19,16 +19,20 @@ export const UserSales = ({ salesType }) => {
 
   if (isLoading) return <p>loading....</p>;
   return (
-    <section>
-      <ul>
+    <section className="user-sales-section">
+      <h3>User Sales:</h3>
+      <ul className="user-sales-ul">
         {sales.map((salesEntry) => {
           return (
-            <li key={salesEntry.sales_entry_id}>
-              <p>{salesEntry.sales_date}</p>
-              <p>{salesEntry.first_name}</p>
-              <p>{salesEntry.surname}</p>
-              <p>{salesEntry.sales_type}</p>
-              <p>{salesEntry.sales_number}</p>
+            <li key={salesEntry.sales_entry_id} className="sales-entry">
+              <p>
+                {salesEntry.sales_date.toString().slice(6, 8)}/
+                {salesEntry.sales_date.toString().slice(4, 6)}/
+                {salesEntry.sales_date.toString().slice(0, 4)}
+              </p>
+              <p>
+                {salesEntry.sales_type}: {salesEntry.sales_number}
+              </p>
             </li>
           );
         })}

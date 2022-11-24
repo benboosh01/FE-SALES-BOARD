@@ -78,6 +78,8 @@ export const Register = () => {
         });
     }
     setDisable(false);
+    alert('user succesfully registered - please login');
+    navigate('/login');
   };
 
   const handleFirstName = (event) => {
@@ -122,59 +124,76 @@ export const Register = () => {
 
   if (isLoading) return <p>loading registration form...</p>;
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        First Name:
-        <input
-          type="text"
-          value={firstName}
-          onChange={handleFirstName}
-          required
-        />
-      </label>
-      <label>
-        Surname:
-        <input type="text" value={surname} onChange={handleSurname} required />
-      </label>
-      {nameValidation ? null : <p>Names must only contain letters</p>}
-      <label>
-        Username:
-        <input
-          type="text"
-          value={username}
-          onChange={handleUsername}
-          required
-        />
-      </label>
-      {usernameValidation ? null : (
-        <p>Username must only contain letter and numbers</p>
+    <form onSubmit={handleSubmit} className="register-form">
+      <h2>Register</h2>
+      <label htmlFor="firstName">First Name:</label>
+      <input
+        id="firstName"
+        type="text"
+        value={firstName}
+        onChange={handleFirstName}
+        placeholder="Enter first name..."
+        required
+      />
+
+      <label htmlFor="surname">Surname:</label>
+      <input
+        id="surname"
+        type="text"
+        value={surname}
+        onChange={handleSurname}
+        placeholder="Enter surname..."
+        required
+      />
+
+      {nameValidation ? null : (
+        <p className="warning">! Names must only contain letters</p>
       )}
-      {usernameTaken ? <p>Username not available</p> : null}
-      <label>
-        Level:
-        <input type="number" value={level} onChange={handleLevel} required />
-      </label>
-      <label>
-        Team:
-        <select value={team} onChange={handleTeam} required>
-          <option value="">Select Team</option>
-          {users
-            .filter((user) => user.level === 2)
-            .map((user) => {
-              return (
-                <option
-                  key={user.username}
-                  value={user.first_name + ' ' + user.surname}
-                >
-                  {user.first_name + ' ' + user.surname}
-                </option>
-              );
-            })}
-        </select>
-      </label>
+      <label htmlFor="username">Username:</label>
+      <input
+        id="username"
+        type="text"
+        value={username}
+        onChange={handleUsername}
+        placeholder="Enter username..."
+        required
+      />
+
+      {usernameValidation ? null : (
+        <p className="warning">Username must only contain letter and numbers</p>
+      )}
+      {usernameTaken ? <p className="warning">Username not available</p> : null}
+      <label htmlFor="level">Level:</label>
+      <input
+        id="level"
+        type="number"
+        value={level}
+        onChange={handleLevel}
+        required
+      />
+
+      <label htmlFor="team">Team:</label>
+      <select id="team" value={team} onChange={handleTeam} required>
+        <option value="">Select Team</option>
+        {users
+          .filter((user) => user.level === 2)
+          .map((user) => {
+            return (
+              <option
+                key={user.username}
+                value={user.first_name + ' ' + user.surname}
+              >
+                {user.first_name + ' ' + user.surname}
+              </option>
+            );
+          })}
+      </select>
+      <div></div>
       <input type="submit" value="Register" disabled={disable} />
-      <button onClick={handleLogin}>Login</button>
       {userExists ? <p>User already registered - please login</p> : null}
+      <button className="login-switch" onClick={handleLogin}>
+        Go to login page
+      </button>
     </form>
   );
 };

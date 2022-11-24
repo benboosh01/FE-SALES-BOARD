@@ -23,9 +23,9 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
 
   if (isLoading) return <p>loading...</p>;
   return (
-    <div>
+    <section className="sales-types-section">
       <p>Sales Types</p>
-      <ul>
+      <ul className="sales-type-ul">
         {salesTypes.map((salesType) => {
           return (
             <button
@@ -43,6 +43,6 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };
