@@ -35,6 +35,16 @@ export const MainNav = () => {
             </NavLink>
           </li>
         ) : undefined}
+        {loggedInUser.username ? (
+          <li>
+            <NavLink
+              to="usersalesboard"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Add Sales
+            </NavLink>
+          </li>
+        ) : undefined}
       </ul>
     </nav>
   );

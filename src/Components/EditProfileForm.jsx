@@ -23,6 +23,7 @@ export const EditProfileForm = ({ handleEditProfile }) => {
     setIsLoading(true);
     getUsers().then(({ users }) => {
       setUsers(users);
+      setLevelTeam(users.filter((user) => user.level === level + 1));
       setIsLoading(false);
     });
   }, []);

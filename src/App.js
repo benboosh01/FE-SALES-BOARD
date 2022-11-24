@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Sales } from './Components/Sales';
 import { SalesType } from './Components/SalesType';
@@ -9,14 +9,24 @@ import { Home } from './Components/Home';
 import { Profile } from './Components/Profile';
 import { UserSales } from './Components/UserSales';
 import { MainNav } from './Components/MainNav';
+import { UserSalesBoard } from './Components/UserSalesBoard';
+import { UserContext } from './contexts/user';
 
 function App() {
   const [salesTypeSelected, setSalesTypeSelected] = useState('');
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+  const handleLogOut = () => {
+    setLoggedInUser({});
+  };
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Salesboard</h1>
+        {loggedInUser.username ? (
+          <button onClick={handleLogOut}>Log out</button>
+        ) : null}
       </header>
       <MainNav />
       <Routes>
@@ -48,6 +58,7 @@ function App() {
             </>
           }
         />
+        <Route path="/usersalesboard" element={<UserSalesBoard />} />
       </Routes>
     </div>
   );

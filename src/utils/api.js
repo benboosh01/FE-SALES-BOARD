@@ -33,8 +33,19 @@ export const addUser = (newUser) => {
 };
 
 export const updateUser = (userUpdate) => {
-  console.log(userUpdate);
   return salesBoardApi.patch('users', userUpdate).then((res) => {
+    return res.data;
+  });
+};
+
+export const addSales = (salesUpdate) => {
+  return salesBoardApi.post('sales', salesUpdate).then((res) => {
+    return res.data;
+  });
+};
+
+export const updateSales = (salesUpdate) => {
+  return salesBoardApi.patch('sales', salesUpdate).then((res) => {
     return res.data;
   });
 };
