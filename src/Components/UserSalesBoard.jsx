@@ -158,7 +158,7 @@ export const UserSalesBoard = () => {
         </select>
 
         <label>Sales Change:</label>
-        <span>{salesNumber}</span>
+        <span className="sales-board-number">{salesNumber}</span>
         <div className="sales-change-div">
           <button onClick={handleMinusSale} className="sales-change-btn">
             -
@@ -171,13 +171,18 @@ export const UserSalesBoard = () => {
       </form>
       <section className="user-sales-section">
         <h3>Sales Processed:</h3>
-        <ul className="user-sales-ul">
+        <ul className="sales-ul">
           {todaysSales.map((salesEntry) => {
             return (
               <li key={salesEntry.sales_entry_id} className="sales-entry">
-                <p>{salesEntry.sales_date}</p>
-                <p>{salesEntry.sales_type}</p>
-                <p>{salesEntry.sales_number}</p>
+                <p className="sales-entry-date">
+                  {salesEntry.sales_date.toString().slice(6, 8)}/
+                  {salesEntry.sales_date.toString().slice(4, 6)}/
+                  {salesEntry.sales_date.toString().slice(0, 4)}
+                </p>
+                <p className="sales-entry-number">
+                  {salesEntry.sales_type}: {salesEntry.sales_number}
+                </p>
               </li>
             );
           })}
