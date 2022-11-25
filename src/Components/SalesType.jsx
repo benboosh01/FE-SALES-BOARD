@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSalesTypes } from '../utils/api';
+import { Loading } from './Loading';
 
 export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,7 +22,7 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
     textDecoration: 'underline',
   };
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section className="sales-types-section">
       <p>Sales Types</p>

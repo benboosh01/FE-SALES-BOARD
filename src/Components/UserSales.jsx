@@ -1,8 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { getSales } from '../utils/api';
 import { UserContext } from '../contexts/user';
-
-import 'react-datepicker/dist/react-datepicker.css';
+import { Loading } from './Loading';
 
 export const UserSales = ({ salesType }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,20 +16,20 @@ export const UserSales = ({ salesType }) => {
     });
   }, [salesType, loggedInUser.username]);
 
-  if (isLoading) return <p>loading....</p>;
+  if (isLoading) return <Loading />;
   return (
     <section className="user-sales-section">
       <h3>User Sales:</h3>
-      <ul className="user-sales-ul">
+      <ul className="sales-ul user-sales-ul">
         {sales.map((salesEntry) => {
           return (
             <li key={salesEntry.sales_entry_id} className="sales-entry">
-              <p>
+              <p className="sales-entry-element sales-entry-date">
                 {salesEntry.sales_date.toString().slice(6, 8)}/
                 {salesEntry.sales_date.toString().slice(4, 6)}/
                 {salesEntry.sales_date.toString().slice(0, 4)}
               </p>
-              <p>
+              <p className="sales-entry-element sales-entry-number">
                 {salesEntry.sales_type}: {salesEntry.sales_number}
               </p>
             </li>

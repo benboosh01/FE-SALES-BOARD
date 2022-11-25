@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getSales } from '../utils/api';
 import DatePicker from 'react-datepicker';
+import { Loading } from './Loading';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -22,7 +23,7 @@ export const Sales = ({ salesType }) => {
     });
   }, [startDate, salesType]);
 
-  if (isLoading) return <p>loading....</p>;
+  if (isLoading) return <Loading />;
   return (
     <section className="all-sales-section">
       <DatePicker
@@ -31,15 +32,19 @@ export const Sales = ({ salesType }) => {
           setStartDate(date);
         }}
       />
-      <ul>
+      <ul className="sales-ul">
         {sales.map((salesEntry) => {
           return (
             <li key={salesEntry.sales_entry_id} className="sales-entry">
-              <p>{salesEntry.sales_date}</p>
-              <p>
+              <p className="sales-entry-element">
+                {salesEntry.sales_date.toString().slice(6, 8)}/
+                {salesEntry.sales_date.toString().slice(4, 6)}/
+                {salesEntry.sales_date.toString().slice(0, 4)}
+              </p>
+              <p className="sales-entry-element sales-entry-name">
                 {salesEntry.first_name} {salesEntry.surname}
               </p>
-              <p>
+              <p className="sales-entry-element">
                 {salesEntry.sales_type}: {salesEntry.sales_number}
               </p>
             </li>

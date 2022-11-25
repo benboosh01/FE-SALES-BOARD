@@ -1,12 +1,20 @@
 import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../contexts/user';
+import { useNavigate } from 'react-router-dom';
 
 export const MainNav = () => {
-  const { loggedInUser } = useContext(UserContext);
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    setLoggedInUser({});
+    navigate('/');
+  };
 
   const activeStyle = {
     fontWeight: 'bold',
+    textDecoration: 'underline',
   };
 
   return (
@@ -46,6 +54,13 @@ export const MainNav = () => {
             >
               Add Sales
             </NavLink>
+          </li>
+        ) : undefined}
+        {loggedInUser.username ? (
+          <li className="nav-link-li">
+            <button className="nav-link" onClick={handleLogOut}>
+              Log out
+            </button>
           </li>
         ) : undefined}
       </ul>

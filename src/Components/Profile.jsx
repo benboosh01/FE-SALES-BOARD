@@ -11,15 +11,18 @@ export const Profile = () => {
   };
 
   return (
-    <section className="profile-section">
-      <h1>Username: {loggedInUser.username}</h1>
-      <p>Name: {loggedInUser.first_name + ' ' + loggedInUser.surname}</p>
-      <p>Line Manager: {loggedInUser.team}</p>
+    <div>
+      <section className="profile-section">
+        <h1>Username: {loggedInUser.username}</h1>
+        <p>Name: {loggedInUser.first_name + ' ' + loggedInUser.surname}</p>
+        <p>Line Manager: {loggedInUser.team}</p>
+        {editProfile ? null : (
+          <button onClick={handleEditProfile}>Edit profile</button>
+        )}
+      </section>
       {editProfile ? (
         <EditProfileForm handleEditProfile={handleEditProfile} />
-      ) : (
-        <button onClick={handleEditProfile}>Edit profile</button>
-      )}
-    </section>
+      ) : null}
+    </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { addUser, getUsers } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from './Loading';
 
 export const Register = () => {
   const [username, setUsername] = useState('');
@@ -14,10 +15,13 @@ export const Register = () => {
   const [disable, setDisable] = useState(false);
   const [usernameValidation, setUsernameValidation] = useState(true);
   const usernameRegex = /^[A-Za-z0-9]+$/;
-  const [nameValidation, setNameValidation] = useState(true);
+  const [firstNameValidation, setFirstNameValidation] = useState(true);
+  const [surnameValidation, setSurnameNameValidation] = useState(true);
   const nameRegex = /^[A-Za-z]+$/;
   const [usernameTaken, setUsernameTaken] = useState(false);
   const navigate = useNavigate();
+  const [formValidation, setFormValidation] = useState(true);
+  const [levelTeam, setLevelTeam] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,72 +36,84 @@ export const Register = () => {
     let usernameTakenVar = false;
     setDisable(true);
     event.preventDefault();
-    const newUser = {
-      username: username,
-      first_name: firstName,
-      surname: surname,
-      level: level,
-      team: team,
-    };
-    for (const user of users) {
+    if (firstNameValidation && surnameValidation && usernameValidation) {
+      const newUser = {
+        username: username,
+        first_name: firstName,
+        surname: surname,
+        level: level,
+        team: team,
+      };
+      for (const user of users) {
+        if (
+          user.first_name.toUpperCase() === newUser.first_name.toUpperCase() &&
+          user.surname.toUpperCase() === newUser.surname.toUpperCase()
+        ) {
+          setUserExists(true);
+          userExistsVar = true;
+          break;
+        } else {
+          setUserExists(false);
+          userExistsVar = false;
+        }
+      }
+      for (const user of users) {
+        if (user.username.toUpperCase() === newUser.username.toUpperCase()) {
+          setUsernameTaken(true);
+          usernameTakenVar = true;
+          break;
+        } else {
+          setUsernameTaken(false);
+          usernameTakenVar = false;
+        }
+      }
       if (
-        user.first_name.toUpperCase() === newUser.first_name.toUpperCase() &&
-        user.surname.toUpperCase() === newUser.surname.toUpperCase()
+        !userExists &&
+        !userExistsVar &&
+        !usernameTaken &&
+        !usernameTakenVar
       ) {
-        setUserExists(true);
-        userExistsVar = true;
-        break;
-      } else {
-        setUserExists(false);
-        userExistsVar = false;
-      }
-    }
-    for (const user of users) {
-      if (user.username.toUpperCase() === newUser.username.toUpperCase()) {
-        setUsernameTaken(true);
-        usernameTakenVar = true;
-        break;
-      } else {
-        setUsernameTaken(false);
-        usernameTakenVar = false;
-      }
-    }
-    if (!userExists && !userExistsVar && !usernameTaken && !usernameTakenVar) {
-      addUser(newUser)
-        .then(({ user }) => {
-          setUsers((currUsers) => {
-            return [...currUsers, user];
+        addUser(newUser)
+          .then(({ user }) => {
+            setUsers((currUsers) => {
+              return [...currUsers, user];
+            });
+          })
+          .then(() => {
+            setUsername('');
+            setFirstName('');
+            setSurname('');
+            setLevel('');
+            setTeam('');
           });
-        })
-        .then(() => {
-          setUsername('');
-          setFirstName('');
-          setSurname('');
-          setLevel('');
-          setTeam('');
-        });
+      }
+      setDisable(false);
+      alert('user succesfully registered - please login');
+      navigate('/login');
+    } else {
+      setFormValidation(false);
+      setDisable(true);
     }
-    setDisable(false);
-    alert('user succesfully registered - please login');
-    navigate('/login');
   };
 
   const handleFirstName = (event) => {
     setFirstName(event.target.value);
     if (nameRegex.test(event.target.value)) {
-      setNameValidation(true);
+      setFirstNameValidation(true);
     } else {
-      setNameValidation(false);
+      setFirstNameValidation(false);
     }
+    validateForm();
   };
 
   const handleSurname = (event) => {
     setSurname(event.target.value);
     if (nameRegex.test(event.target.value)) {
-      setNameValidation(true);
+      setSurnameNameValidation(true);
     } else {
-      setNameValidation(false);
+      setSurnameNameValidation(false);
     }
+    validateForm();
   };
 
   const handleUsername = (event) => {
@@ -108,10 +124,14 @@ export const Register = () => {
     } else {
       setUsernameValidation(false);
     }
+    validateForm();
   };
 
   const handleLevel = (event) => {
     setLevel(event.target.value);
+    setLevelTeam(
+      users.filter((user) => user.level === parseInt(event.target.value) + 1)
+    );
   };
 
   const handleTeam = (event) => {
@@ -122,7 +142,17 @@ export const Register = () => {
     navigate('/login');
   };
 
-  if (isLoading) return <p>loading registration form...</p>;
+  const validateForm = () => {
+    if (firstNameValidation && surnameValidation && usernameValidation) {
+      setFormValidation(true);
+      setDisable(false);
+    } else {
+      setFormValidation(false);
+      setDisable(true);
+    }
+  };
+
+  if (isLoading) return <Loading />;
   return (
     <form onSubmit={handleSubmit} className="register-form">
       <h2>Register</h2>
@@ -135,7 +165,9 @@ export const Register = () => {
         placeholder="Enter first name..."
         required
       />
-
+      {firstNameValidation ? null : (
+        <p className="warning">! Names must only contain letters</p>
+      )}
       <label htmlFor="surname">Surname:</label>
       <input
         id="surname"
@@ -146,7 +178,7 @@ export const Register = () => {
         required
       />
 
-      {nameValidation ? null : (
+      {surnameValidation ? null : (
         <p className="warning">! Names must only contain letters</p>
       )}
       <label htmlFor="username">Username:</label>
@@ -164,31 +196,33 @@ export const Register = () => {
       )}
       {usernameTaken ? <p className="warning">Username not available</p> : null}
       <label htmlFor="level">Level:</label>
-      <input
-        id="level"
-        type="number"
-        value={level}
-        onChange={handleLevel}
-        required
-      />
-
-      <label htmlFor="team">Team:</label>
-      <select id="team" value={team} onChange={handleTeam} required>
-        <option value="">Select Team</option>
-        {users
-          .filter((user) => user.level === 2)
-          .map((user) => {
-            return (
-              <option
-                key={user.username}
-                value={user.first_name + ' ' + user.surname}
-              >
-                {user.first_name + ' ' + user.surname}
-              </option>
-            );
-          })}
+      <select value={level} onChange={handleLevel} id="level" required>
+        <option value="">Select Level</option>
+        <option value={1}>Level 1</option>
+        <option value={2}>Level 2</option>
+        <option value={3}>Level 3</option>
       </select>
-      <div></div>
+      {level ? (
+        <div>
+          <label htmlFor="team">Team:</label>
+          <select value={team} onChange={handleTeam} id="team" required>
+            <option value="">Select Team</option>
+            {levelTeam.map((user) => {
+              return (
+                <option
+                  key={user.username}
+                  value={user.first_name + ' ' + user.surname}
+                >
+                  {user.first_name + ' ' + user.surname}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+      ) : null}
+      {formValidation ? undefined : (
+        <p className="warning">Please fix issues and re-submit</p>
+      )}
       <input type="submit" value="Register" disabled={disable} />
       {userExists ? <p>User already registered - please login</p> : null}
       <button className="login-switch" onClick={handleLogin}>

@@ -45,6 +45,11 @@ body {
     width: 400px;
 }
 
+.nav-link-li > button {
+    background-color: #497174;
+    border: none;
+}
+
 .nav-link {
     display: block;
     color: white;
@@ -103,7 +108,7 @@ body {
     max-width: 400px;
 }
 
-.register-form > select, .register-form > input, .register-form > button {
+.register-form > select, .register-form > input, .register-form > button, .register-form > div > select {
     min-width: 350px;
     min-height: 30px;
 }
@@ -156,20 +161,35 @@ body {
     text-align: center;
 }
 
-.user-sales-ul {
+.sales-ul {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 10px;
-    margin: 15px 0 0 ;
-    padding: 0;
-
+    margin: 25px 0 0 ;
 }
 
 .sales-entry {
     display: flex;
-    justify-content: center;
     gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid black 1px;
+}
+
+.sales-entry-date {
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 50%;
+}
+
+.sales-entry-number {
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 50%;
+}
+
+.sales-entry-name {
+    width: 150px;
+    padding-left: 10px;
 }
 
 footer {
@@ -200,7 +220,7 @@ footer {
 }
 
 .user-sales-form > select, .user-sales-form > input, .user-sales-form > button {
-    min-width: 350px;
+    width: 200px;
     min-height: 30px;
 }
 
@@ -209,3 +229,36 @@ footer {
     gap: 5px;
     align-items: center;
 }
+
+.sales-change-btn {
+    width: 60px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 200px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #383636; /* Black */
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }

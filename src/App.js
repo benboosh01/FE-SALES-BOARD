@@ -1,5 +1,6 @@
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Sales } from './Components/Sales';
 import { SalesType } from './Components/SalesType';
@@ -10,26 +11,15 @@ import { Profile } from './Components/Profile';
 import { UserSales } from './Components/UserSales';
 import { MainNav } from './Components/MainNav';
 import { UserSalesBoard } from './Components/UserSalesBoard';
-import { UserContext } from './contexts/user';
 
 function App() {
-  const [salesTypeSelected, setSalesTypeSelected] = useState('');
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
-
-  const handleLogOut = () => {
-    setLoggedInUser({});
-  };
+  const [salesTypeSelected, setSalesTypeSelected] = useState('cable');
 
   return (
     <div className="App">
       <div>
         <header className="App-header">
           <h1 className="title">Salesboard</h1>
-          {loggedInUser.username ? (
-            <button className="log-out-button" onClick={handleLogOut}>
-              Log out
-            </button>
-          ) : null}
         </header>
         <MainNav />
         <Routes>

@@ -3,6 +3,7 @@ import { addSales, getSales, getSalesTypes, updateSales } from '../utils/api';
 import { UserContext } from '../contexts/user';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
+import { Loading } from './Loading';
 
 export const UserSalesBoard = () => {
   const { loggedInUser } = useContext(UserContext);
@@ -130,7 +131,7 @@ export const UserSalesBoard = () => {
       )
   );
 
-  if (isLoading) return <p>loading salesboard...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section>
       <form onSubmit={handleSubmit} className="user-sales-form">
@@ -157,10 +158,14 @@ export const UserSalesBoard = () => {
         </select>
 
         <label>Sales Change:</label>
+        <span>{salesNumber}</span>
         <div className="sales-change-div">
-          <span>{salesNumber}</span>
-          <button onClick={handleMinusSale}>-</button>
-          <button onClick={handlePlusSale}>+</button>
+          <button onClick={handleMinusSale} className="sales-change-btn">
+            -
+          </button>
+          <button onClick={handlePlusSale} className="sales-change-btn">
+            +
+          </button>
         </div>
         <input type="submit" value="Submit" />
       </form>

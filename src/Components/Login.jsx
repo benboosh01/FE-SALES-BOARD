@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/user';
 import { getUsers } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from './Loading';
 
 export const Login = () => {
   const { setLoggedInUser } = useContext(UserContext);
@@ -46,7 +47,7 @@ export const Login = () => {
     navigate('/profile');
   };
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading) return <Loading />;
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <h2>Login</h2>
