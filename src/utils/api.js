@@ -49,3 +49,9 @@ export const updateSales = (salesUpdate) => {
     return res.data;
   });
 };
+
+export const getOrganisations = () => {
+  return salesBoardApi.get('organisations').then((res) => {
+    return res.data;
+  });
+};

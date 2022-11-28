@@ -19,13 +19,7 @@ export const UserSalesBoard = () => {
     axios
       .all([
         getSalesTypes(),
-        getSales(
-          startDate.toLocaleDateString().slice(6, 10) +
-            startDate.toLocaleDateString().slice(3, 5) +
-            startDate.toLocaleDateString().slice(0, 2),
-          null,
-          loggedInUser.username
-        ),
+        getSales(startDate.toLocaleDateString(), null, loggedInUser.username),
       ])
       .then(
         axios.spread((...allData) => {
@@ -59,11 +53,7 @@ export const UserSalesBoard = () => {
     event.preventDefault();
     const salesUpdate = {
       sales_user: loggedInUser.username,
-      sales_date: parseInt(
-        startDate.toLocaleDateString().slice(6, 10) +
-          startDate.toLocaleDateString().slice(3, 5) +
-          startDate.toLocaleDateString().slice(0, 2)
-      ),
+      sales_date: startDate.toLocaleDateString(),
       sales_type: salesType,
       sales_number: salesNumber,
     };
@@ -80,11 +70,7 @@ export const UserSalesBoard = () => {
     if (salesEntryFound) {
       const updateSalesEntry = {
         sales_user: loggedInUser.username,
-        sales_date: parseInt(
-          startDate.toLocaleDateString().slice(6, 10) +
-            startDate.toLocaleDateString().slice(3, 5) +
-            startDate.toLocaleDateString().slice(0, 2)
-        ),
+        sales_date: startDate.toLocaleDateString(),
         sales_type: salesType,
         inc_sales: salesNumber,
       };
@@ -92,9 +78,9 @@ export const UserSalesBoard = () => {
         setSales((currSales) => {
           const updatedSales = currSales.filter((salesEntry) => {
             return (
-              salesEntry.sales_date !== updateSalesEntry.sales_date &&
+              salesEntry.sales_date === updateSalesEntry.sales_date &&
               salesEntry.sales_type !== updateSalesEntry.sales_type &&
-              salesEntry.sales_user !== updateSalesEntry.sales_user
+              salesEntry.sales_user === updateSalesEntry.sales_user
             );
           });
           return [...updatedSales, sales.salesEntry];
@@ -103,17 +89,12 @@ export const UserSalesBoard = () => {
     } else {
       const newSalesEntry = {
         sales_user: loggedInUser.username,
-        sales_date: parseInt(
-          startDate.toLocaleDateString().slice(6, 10) +
-            startDate.toLocaleDateString().slice(3, 5) +
-            startDate.toLocaleDateString().slice(0, 2)
-        ),
+        sales_date: startDate.toLocaleDateString(),
         sales_type: salesType,
         sales_number: salesNumber,
       };
       addSales(newSalesEntry).then((response) => {
         setSales((currSales) => {
-          console.log(currSales, response.salesEntry);
           return [...currSales, response.salesEntry];
         });
       });
@@ -122,13 +103,7 @@ export const UserSalesBoard = () => {
   };
 
   const todaysSales = sales.filter(
-    (salesEntry) =>
-      salesEntry.sales_date ===
-      parseInt(
-        startDate.toLocaleDateString().slice(6, 10) +
-          startDate.toLocaleDateString().slice(3, 5) +
-          startDate.toLocaleDateString().slice(0, 2)
-      )
+    (salesEntry) => salesEntry.sales_date === startDate.toLocaleDateString()
   );
 
   if (isLoading) return <Loading />;
@@ -179,9 +154,7 @@ export const UserSalesBoard = () => {
             return (
               <li key={salesEntry.sales_entry_id} className="sales-entry">
                 <p className="sales-entry-date">
-                  {salesEntry.sales_date.toString().slice(6, 8)}/
-                  {salesEntry.sales_date.toString().slice(4, 6)}/
-                  {salesEntry.sales_date.toString().slice(0, 4)}
+                  {salesEntry.sales_date.toString()}
                 </p>
                 <p className="sales-entry-number">
                   {salesEntry.sales_type}: {salesEntry.sales_number}

@@ -12,12 +12,7 @@ export const Sales = ({ salesType }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getSales(
-      startDate.toLocaleDateString().slice(6, 10) +
-        startDate.toLocaleDateString().slice(3, 5) +
-        startDate.toLocaleDateString().slice(0, 2),
-      salesType
-    ).then(({ sales }) => {
+    getSales(startDate.toLocaleDateString(), salesType).then(({ sales }) => {
       setSales(sales);
       setIsLoading(false);
     });
@@ -36,11 +31,7 @@ export const Sales = ({ salesType }) => {
         {sales.map((salesEntry) => {
           return (
             <li key={salesEntry.sales_entry_id} className="sales-entry">
-              <p className="sales-entry-element">
-                {salesEntry.sales_date.toString().slice(6, 8)}/
-                {salesEntry.sales_date.toString().slice(4, 6)}/
-                {salesEntry.sales_date.toString().slice(0, 4)}
-              </p>
+              <p className="sales-entry-element">{salesEntry.sales_date}</p>
               <p className="sales-entry-element sales-entry-name">
                 {salesEntry.first_name} {salesEntry.surname}
               </p>
