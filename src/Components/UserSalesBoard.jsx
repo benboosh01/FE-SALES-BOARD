@@ -160,14 +160,17 @@ export const UserSalesBoard = () => {
         <label>Sales Change:</label>
         <span className="sales-board-number">{salesNumber}</span>
         <div className="sales-change-div">
-          <button onClick={handleMinusSale} className="sales-change-btn">
+          <button
+            onClick={handleMinusSale}
+            className="app-btn sales-change-btn"
+          >
             -
           </button>
-          <button onClick={handlePlusSale} className="sales-change-btn">
+          <button onClick={handlePlusSale} className="app-btn sales-change-btn">
             +
           </button>
         </div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="app-btn" />
       </form>
       <section className="user-sales-section">
         <h3>Sales Processed:</h3>

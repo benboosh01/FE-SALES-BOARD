@@ -150,7 +150,12 @@ export const EditProfileForm = ({ handleEditProfile }) => {
       {formValidation ? undefined : (
         <p className="warning">Please fix issues and re-submit</p>
       )}
-      <input type="submit" value="Confirm" disabled={disable} />
+      <input
+        type="submit"
+        value="Confirm"
+        disabled={disable}
+        className="app-btn"
+      />
     </form>
   );
 };

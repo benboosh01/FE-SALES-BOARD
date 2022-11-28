@@ -30,6 +30,7 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
         {salesTypes.map((salesType) => {
           return (
             <button
+              className="app-btn"
               onClick={handleSelection}
               key={salesType.sales_type}
               value={salesType.sales_type}

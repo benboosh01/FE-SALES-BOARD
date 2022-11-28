@@ -23,8 +23,12 @@ export const Home = () => {
       </p>
       {loggedInUser.username ? undefined : (
         <div className="home-buttons">
-          <button onClick={handleLogin}>Login</button>
-          <button onClick={handleRegister}>Register</button>
+          <button className="app-btn" onClick={handleLogin}>
+            Login
+          </button>
+          <button className="app-btn" onClick={handleRegister}>
+            Register
+          </button>
         </div>
       )}
     </section>

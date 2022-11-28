@@ -43,10 +43,21 @@ body {
     background-color: #D6E4E5;
 }
 
+.app-btn {
+    background-color: #497174;
+    text-align: center;
+    width: 125px;
+    color: white;
+    padding: 8px 0;
+    border: none;
+    border-radius: 5px;
+}
+
 .nav-link-li {
     background-color: #497174;
     text-align: center;
     width: 300px;
+    border-radius: 5px;
 }
 
 .nav-link-li > button {

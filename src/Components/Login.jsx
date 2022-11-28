@@ -59,8 +59,10 @@ export const Login = () => {
         value={username}
         placeholder="Enter username..."
       />
-      <input type="submit" value="Login" />
-      <button onClick={handleRegister}>Register</button>
+      <input type="submit" value="Login" className="app-btn" />
+      <button onClick={handleRegister} className="app-btn">
+        Register
+      </button>
       {userFound ? null : (
         <div>
           <p>User not found.. please try again or register</p>

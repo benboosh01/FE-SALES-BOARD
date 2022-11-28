@@ -17,7 +17,9 @@ export const Profile = () => {
         <p>Name: {loggedInUser.first_name + ' ' + loggedInUser.surname}</p>
         <p>Line Manager: {loggedInUser.team}</p>
         {editProfile ? null : (
-          <button onClick={handleEditProfile}>Edit profile</button>
+          <button className="app-btn" onClick={handleEditProfile}>
+            Edit profile
+          </button>
         )}
       </section>
       {editProfile ? (
