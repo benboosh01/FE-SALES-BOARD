@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/user';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 export const MainNav = () => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const [navOpen, setNavOpen] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -24,16 +25,27 @@ export const MainNav = () => {
     textDecoration: 'underline',
   };
 
+  useEffect(() => {
+    const changeWidth = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', changeWidth);
+  }, []);
+
   return (
     <nav>
-      <button className="burger" onClick={handleNav}>
-        {navOpen ? (
-          <FontAwesomeIcon icon={faXmark} />
-        ) : (
-          <FontAwesomeIcon icon={faBars} />
-        )}
-      </button>
-      {navOpen ? (
+      {screenWidth < 768 ? (
+        <button className="burger" onClick={handleNav}>
+          {navOpen ? (
+            <FontAwesomeIcon icon={faXmark} />
+          ) : (
+            <FontAwesomeIcon icon={faBars} />
+          )}
+        </button>
+      ) : null}
+
+      {navOpen || screenWidth >= 768 ? (
         <ul className="main-nav-ul">
           <li className="nav-link-li">
             <NavLink className="nav-link" to="/" end>
