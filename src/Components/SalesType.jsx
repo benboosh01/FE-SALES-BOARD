@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSalesTypes } from '../utils/api';
+import { Loading } from './Loading';
 
 export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -21,14 +22,15 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
     textDecoration: 'underline',
   };
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading) return <Loading />;
   return (
-    <div>
+    <section className="sales-types-section">
       <p>Sales Types</p>
-      <ul>
+      <ul className="sales-type-ul">
         {salesTypes.map((salesType) => {
           return (
             <button
+              className="app-btn"
               onClick={handleSelection}
               key={salesType.sales_type}
               value={salesType.sales_type}
@@ -43,6 +45,6 @@ export const SalesType = ({ setSalesTypeSelected, salesTypeSelected }) => {
           );
         })}
       </ul>
-    </div>
+    </section>
   );
 };

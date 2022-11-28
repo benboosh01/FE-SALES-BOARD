@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../contexts/user';
 import { getUsers } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from './Loading';
 
 export const Login = () => {
   const { setLoggedInUser } = useContext(UserContext);
@@ -46,15 +47,22 @@ export const Login = () => {
     navigate('/profile');
   };
 
-  if (isLoading) return <p>loading...</p>;
+  if (isLoading) return <Loading />;
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username
-        <input type="text" onChange={handleUsername} value={username} />
-      </label>
-      <input type="submit" value="Login" />
-      <button onClick={handleRegister}>Register</button>
+    <form onSubmit={handleSubmit} className="login-form">
+      <h2>Login</h2>
+      <label htmlFor="username">Username:</label>
+      <input
+        type="text"
+        id="username"
+        onChange={handleUsername}
+        value={username}
+        placeholder="Enter username..."
+      />
+      <input type="submit" value="Login" className="app-btn" />
+      <button onClick={handleRegister} className="app-btn">
+        Register
+      </button>
       {userFound ? null : (
         <div>
           <p>User not found.. please try again or register</p>

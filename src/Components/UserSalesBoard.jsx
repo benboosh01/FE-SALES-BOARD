@@ -3,6 +3,7 @@ import { addSales, getSales, getSalesTypes, updateSales } from '../utils/api';
 import { UserContext } from '../contexts/user';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
+import { Loading } from './Loading';
 
 export const UserSalesBoard = () => {
   const { loggedInUser } = useContext(UserContext);
@@ -130,54 +131,66 @@ export const UserSalesBoard = () => {
       )
   );
 
-  if (isLoading) return <p>loading salesboard...</p>;
+  if (isLoading) return <Loading />;
   return (
     <section>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" value={loggedInUser.username} required disabled />
-        </label>
-        <label>
-          Sales Date:
-          <DatePicker
-            selected={startDate}
-            onChange={(date) => {
-              setStartDate(date);
-            }}
-          />
-        </label>
-        <label>
-          Sales Type:
-          <select value={salesType} onChange={handleSalesType}>
-            {salesTypes.map((salesType) => {
-              return (
-                <option key={salesType.sales_type} value={salesType.sales_type}>
-                  {salesType.sales_type}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-        <label>
-          Sales Change:
-          <span>{salesNumber}</span>
-          <button onClick={handleMinusSale}>-</button>
-          <button onClick={handlePlusSale}>+</button>
-          <input type="submit" value="Submit" />
-        </label>
+      <form onSubmit={handleSubmit} className="user-sales-form">
+        <label>Username:</label>
+        <input type="text" value={loggedInUser.username} required disabled />
+
+        <label>Sales Date:</label>
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => {
+            setStartDate(date);
+          }}
+        />
+
+        <label>Sales Type:</label>
+        <select value={salesType} onChange={handleSalesType}>
+          {salesTypes.map((salesType) => {
+            return (
+              <option key={salesType.sales_type} value={salesType.sales_type}>
+                {salesType.sales_type}
+              </option>
+            );
+          })}
+        </select>
+
+        <label>Sales Change:</label>
+        <span className="sales-board-number">{salesNumber}</span>
+        <div className="sales-change-div">
+          <button
+            onClick={handleMinusSale}
+            className="app-btn sales-change-btn"
+          >
+            -
+          </button>
+          <button onClick={handlePlusSale} className="app-btn sales-change-btn">
+            +
+          </button>
+        </div>
+        <input type="submit" value="Submit" className="app-btn" />
       </form>
-      <ul>
-        {todaysSales.map((salesEntry) => {
-          return (
-            <li key={salesEntry.sales_entry_id}>
-              <p>{salesEntry.sales_date}</p>
-              <p>{salesEntry.sales_type}</p>
-              <p>{salesEntry.sales_number}</p>
-            </li>
-          );
-        })}
-      </ul>
+      <section className="user-sales-section">
+        <h3>Sales Processed:</h3>
+        <ul className="sales-ul">
+          {todaysSales.map((salesEntry) => {
+            return (
+              <li key={salesEntry.sales_entry_id} className="sales-entry">
+                <p className="sales-entry-date">
+                  {salesEntry.sales_date.toString().slice(6, 8)}/
+                  {salesEntry.sales_date.toString().slice(4, 6)}/
+                  {salesEntry.sales_date.toString().slice(0, 4)}
+                </p>
+                <p className="sales-entry-number">
+                  {salesEntry.sales_type}: {salesEntry.sales_number}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
     </section>
   );
 };

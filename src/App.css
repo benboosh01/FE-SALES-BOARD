@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+body {
+    background-color: #EFF5F5;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.App-header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #D6E4E5;
+}
+
+.title {
+    padding: 50px 0 20px;
+    font-size: 3em;
+}
+
+.log-out-button {
+    width: 100px;
+    padding: 5px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+.main-nav-ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 0 30px;
+    background-color: #D6E4E5;
+}
+
+.app-btn {
+    background-color: #497174;
+    text-align: center;
+    width: 125px;
+    color: white;
+    padding: 8px 0;
+    border: none;
+    border-radius: 5px;
+}
+
+.nav-link-li {
+    background-color: #497174;
+    text-align: center;
+    width: 300px;
+    border-radius: 5px;
+}
+
+.nav-link-li > button {
+    background-color: #497174;
+    border: none;
+}
+
+.nav-link {
+    display: block;
+    color: white;
+    width: 100% !important;
+    text-decoration: none;
+    padding: 10px;
+}
+
+.home-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.home-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+    max-width: 400px;
+    align-items: center;
+    margin: 40px auto 0;
+    padding: 20px;
+    background-color: #D6E4E5;
+}
+
+.login-form > input, .login-form > button {
+    min-width: 350px;
+    min-height: 30px;
+}
+
+.login-form > label {
+    margin: 0 0 -10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    padding: 20px;
+    background-color: #D6E4E5;
+    max-width: 400px;
+}
+
+.register-form > select, .register-form > input, .register-form > button, .register-form > div > select {
+    min-width: 350px;
+    min-height: 30px;
+}
+
+.register-form > label {
+    margin: 0 0 -10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warning {
+    color: red;
+}
+
+.profile-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    background-color: #D6E4E5;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.sales-types-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto 0;
+    background-color: #D6E4E5;
+    max-width: 400px;
+    padding: 20px;
+    gap: 10px;
+}
+
+.sales-type-ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 5px;
+}
+
+.user-sales-section {
+    background-color: #D6E4E5;
+    max-width: 400px;
+    margin: 20px auto 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.sales-ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 25px 0 0 ;
+}
+
+.sales-entry {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid black 1px;
+}
+
+.sales-entry-date {
+    display: flex;
+    justify-content: flex-end;
+    flex-basis: 50%;
+}
+
+.sales-entry-number {
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 50%;
+}
+
+.sales-entry-name {
+    width: 150px;
+    padding-left: 10px;
+}
+
+footer {
+    margin-top: 20px;
+    background-color: #D6E4E5;
+    height: 50px;
+}
+
+.all-sales-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #D6E4E5;
+    max-width: 400px;
+    margin: 20px auto 0;
+    padding: 20px;
+    align-items: center;
+}
+
+.user-sales-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #D6E4E5;
+    max-width: 400px;
+    margin: 20px auto 0;
+    padding: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-sales-form > select, .user-sales-form > input, .user-sales-form > button {
+    width: 200px;
+    min-height: 30px;
+}
+
+.sales-change-div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.sales-change-btn {
+    width: 60px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 200px;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid #383636; 
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+  }
+
+  .sales-board-number {
+    font-size: 1.4em;
+  }
+
+.burger {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.8em;
+    border: none;
+    background-color: transparent;
+}
+
+@media (min-width: 768px) {
+    .main-nav-ul {
+        flex-direction: row;
+    }
+
+    .nav-link-li {
+        width: 150px;
+    }
+
+    .title {
+        padding: 20px 0;
+    }
+}
