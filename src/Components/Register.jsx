@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { addUser, getUsers } from '../utils/api';
+import { addUser, getOrganisations, getUsers } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { Loading } from './Loading';
+import axios from 'axios';
 
 export const Register = () => {
   const [username, setUsername] = useState('');
@@ -22,13 +23,18 @@ export const Register = () => {
   const navigate = useNavigate();
   const [formValidation, setFormValidation] = useState(true);
   const [levelTeam, setLevelTeam] = useState([]);
+  const [organisations, setOrganisations] = useState([]);
+  const [selectedOrganisation, setSelectedOrganisation] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
-    getUsers().then(({ users }) => {
-      setUsers(users);
-      setIsLoading(false);
-    });
+    axios.all([getUsers(), getOrganisations()]).then(
+      axios.spread((...allData) => {
+        setUsers(allData[0].users);
+        setOrganisations(allData[1].organisations);
+        setIsLoading(false);
+      })
+    );
   }, []);
 
   const handleSubmit = (event) => {
@@ -43,6 +49,7 @@ export const Register = () => {
         surname: surname,
         level: level,
         team: team,
+        organisation: selectedOrganisation,
       };
       for (const user of users) {
         if (
@@ -130,7 +137,11 @@ export const Register = () => {
   const handleLevel = (event) => {
     setLevel(event.target.value);
     setLevelTeam(
-      users.filter((user) => user.level === parseInt(event.target.value) + 1)
+      users.filter(
+        (user) =>
+          user.level === parseInt(event.target.value) + 1 &&
+          user.organisation === selectedOrganisation
+      )
     );
   };
 
@@ -150,6 +161,10 @@ export const Register = () => {
       setFormValidation(false);
       setDisable(true);
     }
+  };
+
+  const handleOrganisation = (event) => {
+    setSelectedOrganisation(event.target.value);
   };
 
   if (isLoading) return <Loading />;
@@ -195,6 +210,25 @@ export const Register = () => {
         <p className="warning">Username must only contain letter and numbers</p>
       )}
       {usernameTaken ? <p className="warning">Username not available</p> : null}
+      <label htmlFor="organisation">Organisation:</label>
+      <select
+        value={selectedOrganisation}
+        onChange={handleOrganisation}
+        id="organisation"
+        required
+      >
+        <option value="">Select Organisation</option>
+        {organisations.map((organisation) => {
+          return (
+            <option
+              key={organisation.organisation_name}
+              value={organisation.organisation__name}
+            >
+              {organisation.organisation_name}
+            </option>
+          );
+        })}
+      </select>
       <label htmlFor="level">Level:</label>
       <select value={level} onChange={handleLevel} id="level" required>
         <option value="">Select Level</option>
@@ -202,7 +236,7 @@ export const Register = () => {
         <option value={2}>Level 2</option>
         <option value={3}>Level 3</option>
       </select>
-      {level ? (
+      {level && selectedOrganisation ? (
         <div>
           <label htmlFor="team">Team:</label>
           <select value={team} onChange={handleTeam} id="team" required>
@@ -220,6 +254,7 @@ export const Register = () => {
           </select>
         </div>
       ) : null}
+
       {formValidation ? undefined : (
         <p className="warning">Please fix issues and re-submit</p>
       )}

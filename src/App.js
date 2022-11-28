@@ -13,7 +13,7 @@ import { MainNav } from './Components/MainNav';
 import { UserSalesBoard } from './Components/UserSalesBoard';
 
 function App() {
-  const [salesTypeSelected, setSalesTypeSelected] = useState('cable');
+  const [salesTypeSelected, setSalesTypeSelected] = useState('');
 
   return (
     <div className="App">
