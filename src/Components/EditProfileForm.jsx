@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/user';
 import { getUsers, updateUser } from '../utils/api';
 import { Loading } from './Loading';
 
-export const EditProfileForm = ({ handleEditProfile }) => {
+export const EditProfileForm = ({ handleEditProfile, setEditProfile }) => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -156,6 +156,9 @@ export const EditProfileForm = ({ handleEditProfile }) => {
         disabled={disable}
         className="app-btn"
       />
+      <button className="app-btn" onClick={setEditProfile}>
+        Cancel
+      </button>
     </form>
   );
 };

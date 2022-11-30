@@ -23,7 +23,10 @@ export const Profile = () => {
         )}
       </section>
       {editProfile ? (
-        <EditProfileForm handleEditProfile={handleEditProfile} />
+        <EditProfileForm
+          handleEditProfile={handleEditProfile}
+          setEditProfile={setEditProfile}
+        />
       ) : null}
     </div>
   );
