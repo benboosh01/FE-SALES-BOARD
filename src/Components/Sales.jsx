@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const Sales = ({ salesType }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sales, setSales] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date('2022-11-28'));
 
   useEffect(() => {
     setIsLoading(true);
