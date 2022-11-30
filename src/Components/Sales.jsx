@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 export const Sales = ({ salesType }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [sales, setSales] = useState([]);
-  const [startDate, setStartDate] = useState(new Date('2022-11-28'));
+  const [startDate, setStartDate] = useState(new Date('2022-11-30'));
   const [teamName, setTeamName] = useState('');
 
   useEffect(() => {
@@ -29,22 +29,29 @@ export const Sales = ({ salesType }) => {
   if (isLoading) return <Loading />;
   return (
     <section className="all-sales-section">
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => {
-          setStartDate(date);
-        }}
-      />
-      <select value={teamName} onChange={handleTeamFilter}>
-        <option value="">All Sales</option>
-        {uniqueTeamNames.map((team) => {
-          return (
-            <option key={team} value={team}>
-              {team}
-            </option>
-          );
-        })}
-      </select>
+      <div className="filter-div">
+        <DatePicker
+          dateFormat="dd/MM/yyyy"
+          selected={startDate}
+          onChange={(date) => {
+            setStartDate(date);
+          }}
+        />
+        <select
+          value={teamName}
+          onChange={handleTeamFilter}
+          className="filter-div-child"
+        >
+          <option value="">All Sales</option>
+          {uniqueTeamNames.map((team) => {
+            return (
+              <option key={team} value={team}>
+                {team}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <ul className="sales-ul">
         <li className="sales-entry">
           <p className="sales-entry-element sales-entry-name">Name:</p>

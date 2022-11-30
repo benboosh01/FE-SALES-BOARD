@@ -51,6 +51,7 @@ export const Register = () => {
         team: team,
         organisation: selectedOrganisation,
       };
+      console.log(newUser);
       for (const user of users) {
         if (
           user.first_name.toUpperCase() === newUser.first_name.toUpperCase() &&
@@ -74,12 +75,7 @@ export const Register = () => {
           usernameTakenVar = false;
         }
       }
-      if (
-        !userExists &&
-        !userExistsVar &&
-        !usernameTaken &&
-        !usernameTakenVar
-      ) {
+      if (!userExistsVar && !usernameTakenVar) {
         addUser(newUser)
           .then(({ user }) => {
             setUsers((currUsers) => {
@@ -93,13 +89,10 @@ export const Register = () => {
             setLevel('');
             setTeam('');
           });
+        setDisable(false);
+        alert('user succesfully registered - please login');
+        navigate('/login');
       }
-      setDisable(false);
-      alert('user succesfully registered - please login');
-      navigate('/login');
-    } else {
-      setFormValidation(false);
-      setDisable(true);
     }
   };
 
@@ -259,8 +252,10 @@ export const Register = () => {
         <p className="warning">Please fix issues and re-submit</p>
       )}
       <input type="submit" value="Register" disabled={disable} />
-      {userExists ? <p>User already registered - please login</p> : null}
-      <button className="login-switch" onClick={handleLogin}>
+      {userExists ? (
+        <p className="warning">User already registered - please login</p>
+      ) : null}
+      <button type="button" className="login-switch" onClick={handleLogin}>
         Go to login page
       </button>
     </form>

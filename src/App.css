@@ -168,6 +168,22 @@ body {
     gap: 5px;
 }
 
+.filter-div {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-div-child {
+    width: 130px;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+    display: block;
+    width: 130px;
+}
+
 .user-sales-section {
     background-color: #D6E4E5;
     max-width: 400px;
@@ -252,13 +268,6 @@ footer {
 
 .sales-change-btn {
     width: 60px;
-}
-
-.react-datepicker-wrapper,
-.react-datepicker__input-container,
-.react-datepicker__input-container input {
-    display: block;
-    width: 200px;
 }
 
 .spinner-container {

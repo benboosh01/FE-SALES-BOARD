@@ -60,7 +60,7 @@ export const Login = () => {
         placeholder="Enter username..."
       />
       <input type="submit" value="Login" className="app-btn" />
-      <button onClick={handleRegister} className="app-btn">
+      <button onClick={handleRegister} className="app-btn" type="button">
         Register
       </button>
       {userFound ? null : (
