@@ -63,6 +63,7 @@ body {
 .nav-link-li > button {
     background-color: #497174;
     border: none;
+    border-radius: 5px;
 }
 
 .nav-link {
