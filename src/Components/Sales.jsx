@@ -28,12 +28,19 @@ export const Sales = ({ salesType }) => {
         }}
       />
       <ul className="sales-ul">
+        <li className="sales-entry">
+          <p className="sales-entry-element sales-entry-name">Name:</p>
+          <p className="sales-entry-elemen sales-entry-name">Team:</p>
+          <p className="sales-entry-element">Sales:</p>
+        </li>
         {sales.map((salesEntry) => {
           return (
             <li key={salesEntry.sales_entry_id} className="sales-entry">
-              <p className="sales-entry-element">{salesEntry.sales_date}</p>
               <p className="sales-entry-element sales-entry-name">
                 {salesEntry.first_name} {salesEntry.surname}
+              </p>
+              <p className="sales-entry-element sales-entry-name">
+                {salesEntry.team}
               </p>
               <p className="sales-entry-element">
                 {salesEntry.sales_type}: {salesEntry.sales_number}

@@ -149,7 +149,7 @@ export const UserSalesBoard = () => {
       </form>
       <section className="user-sales-section">
         <h3>Sales Processed:</h3>
-        <ul className="sales-ul">
+        <ul className="sales-ul user-sales-ul">
           {todaysSales.map((salesEntry) => {
             return (
               <li key={salesEntry.sales_entry_id} className="sales-entry">

@@ -181,11 +181,16 @@ body {
     flex-direction: column;
     gap: 10px;
     margin: 25px 0 0 ;
+    font-size: 0.8em;
+}
+
+.user-sales-ul {
+    font-size: 1em;
 }
 
 .sales-entry {
     display: flex;
-    gap: 10px;
+    gap: 5px;
     padding-bottom: 10px;
     border-bottom: solid black 1px;
 }
@@ -203,7 +208,7 @@ body {
 }
 
 .sales-entry-name {
-    width: 150px;
+    width: 130px;
     padding-left: 10px;
 }
 
