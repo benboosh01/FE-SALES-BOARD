@@ -25,9 +25,7 @@ export const UserSales = ({ salesType }) => {
           return (
             <li key={salesEntry.sales_entry_id} className="sales-entry">
               <p className="sales-entry-element sales-entry-date">
-                {salesEntry.sales_date.toString().slice(6, 8)}/
-                {salesEntry.sales_date.toString().slice(4, 6)}/
-                {salesEntry.sales_date.toString().slice(0, 4)}
+                {salesEntry.sales_date.toString()}
               </p>
               <p className="sales-entry-element sales-entry-number">
                 {salesEntry.sales_type}: {salesEntry.sales_number}
