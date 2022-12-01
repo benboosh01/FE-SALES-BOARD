@@ -72,7 +72,7 @@ export const MainNav = () => {
               </NavLink>
             </li>
           ) : undefined}
-          {loggedInUser.username ? (
+          {loggedInUser.level === 1 ? (
             <li className="nav-link-li">
               <NavLink
                 className="nav-link"
